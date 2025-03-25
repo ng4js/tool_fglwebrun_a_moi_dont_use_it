@@ -839,12 +839,9 @@ FUNCTION runGAS()
     IF fgl_getenv("NODEVELOPMENT") IS NULL THEN
       LET cmd=cmd,'  -E res.uaproxy.param=--development '
     END IF
-    IF fgl_getenv("OMITCONSOLE") IS NULL THEN
-      LET cmd = cmd, ' -E "res.log.output.type=CONSOLE"'
-    END IF
-    IF NOT isWin() THEN
-      LET cmd=cmd,' -E "res.log.output.path=/tmp"'
-    END IF
+    LET cmd = cmd, ' -E "res.log.output.type=DAILYFILE"'
+    LET cmd = cmd,' -E "res.log.output.path=c:\\temp"'
+    LET cmd = cmd,' -E "res.log.categories_filter=ALL"'
     IF m_gbcdir IS NOT NULL THEN
       LET cmd=cmd,
         --hooray, renamed options ... , since 3.10 "res.path.gbc.user"
